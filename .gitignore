@@ -1,0 +1,7 @@
+# 构建产物（app/build.sh 生成）
+app/build/
+
+# 系统与工具的杂项
+.DS_Store
+__pycache__/
+*.pyc

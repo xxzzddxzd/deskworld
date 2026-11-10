@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>动态桌面 · 场景图鉴</title>
+<link rel="stylesheet" href="style.css">
+<!-- 只有页面真的在前台渲染时才播放入场动画；后台加载时内容直接可见 -->
+<script>requestAnimationFrame(function () { if (performance.now() < 1500) document.documentElement.classList.add('intro'); });</script>
+</head>
+<body>
+<div class="page">
+
+  <header class="top">
+    <p class="eyebrow"><b>Desktop Worlds</b><i></i>Mac 动态桌面 · 场景图鉴 · 第 0 版</p>
+    <h1>文件落在哪里，<br>世界就<span>长</span>在哪里</h1>
+    <p class="lede">下面是一块模拟的 Mac 桌面。拖动文件、添加或移除几个，看场景怎么回应。几张图版共用同一套机制，只是换了一个世界——挑一个，先把它做成真的。</p>
+  </header>
+
+  <section class="hero">
+    <div class="plate" id="plate">
+      <div class="stage" id="stage">
+        <canvas id="gl"></canvas>
+        <canvas id="over"></canvas>
+        <div class="world" id="world">
+          <div class="menubar"><b>访达</b><span>文件</span><span>编辑</span><span>显示</span><span>前往</span><span>窗口</span><span>帮助</span><em id="clock"></em></div>
+          <div class="icons" id="icons"></div>
+          <div class="dock"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="sep"></i><i></i><i></i></div>
+        </div>
+        <div class="hint" id="hint">拖动任意一个文件试试</div>
+      </div>
+      <div class="plate-foot">
+        <div class="caption" id="caption"></div>
+        <div class="tools" id="tools">
+          <button data-act="add">＋ 添加文件</button>
+          <button data-act="remove">－ 移除文件</button>
+          <button data-act="tidy">整理成列</button>
+          <button data-act="scatter">随机散开</button>
+          <button data-act="reset" class="quiet">重置</button>
+          <button data-act="theater" class="quiet" id="theaterBtn">沉浸预览</button>
+        </div>
+      </div>
+    </div>
+    <aside class="info" id="info"></aside>
+  </section>
+
+  <h2 class="sec">全部图版<small>Plates</small></h2>
+  <section class="cards" id="cards"></section>
+
+  <h2 class="sec">它们共用的机制<small>How it works</small></h2>
+  <section class="how">
+    <div><span class="k">1</span><h4>读位置</h4><p>壁纸程序向访达询问桌面上每个图标的坐标。文件被拖动、新建或删除，都会被察觉。</p></div>
+    <div><span class="k">2</span><h4>叠成场</h4><p>每个文件像一处热源，向四周散开影响力。相邻的文件影响相加，于是两个文件的沙洲会连成岛，一堆文件会隆成山。</p></div>
+    <div><span class="k">3</span><h4>长出世界</h4><p>这张看不见的「高度图」决定哪里是陆地、云或莲叶；鱼、船、羊和落叶再依着地形活动。换场景，只是换一种读法。</p></div>
+  </section>
+  <section class="foot">
+    <p><b>不打扰桌面</b>壁纸画在桌面图标的下一层，不拦截任何点击与拖拽；桌面被窗口完全盖住时自动暂停。</p>
+    <p><b>还没画的备选</b>极地浮冰（企鹅在浮冰间跳）· 雪地温泉 · 萤火营地 · 珊瑚浅礁 · 迷你城市（文件长成街区，路自动连起来）</p>
+  </section>
+
+</div>
+<pre id="err"></pre>
+
+<script src="engine.js"></script>
+<script src="scenes/clouds.js"></script>
+<script src="scenes/ocean.js"></script>
+<script src="scenes/pond.js"></script>
+<script src="scenes/zen.js"></script>
+<script src="scenes/oasis.js"></script>
+<script src="scenes/stars.js"></script>
+<script src="scenes/paper.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

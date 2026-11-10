@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>桌面世界 · 壁纸</title>
+<style>
+  html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #0e2a3a; }
+  #gl, #over { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; display: block; }
+  #over { pointer-events: none; display: none; }
+
+  /* 图层：纸鹤、纸船、装饰、纸屑各是一小块合成层，只靠 transform / opacity 变化，由系统合成器驱动 */
+  .host { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; overflow: hidden; pointer-events: none; }
+  .sp { position: absolute; left: 0; top: 0; will-change: transform; transition: opacity .5s ease; }
+  .part { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: transform; }
+  .part canvas { display: block; width: 100%; height: 100%; }
+  .flap { animation: flap 1.05s ease-in-out infinite alternate; }
+  @keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(.44); } }
+  .bit { position: absolute; left: 0; top: 0; margin: -3px 0 0 -4px; will-change: transform, opacity; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+  body.paused .flap { animation-play-state: paused; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="ground" class="host"></div>
+<div id="sky" class="host"></div>
+<canvas id="over"></canvas>
+<!-- 世界 = 这块屏幕的点数尺寸；真实桌面的图标可能很多，发射源上限放宽 -->
+<script>window.DD_WORLD = { w: window.innerWidth || screen.width, h: window.innerHeight || screen.height, maxn: 128 };</script>
+<script src="engine.js"></script>
+<script src="scenes/paper.js"></script>
+<script src="wall.js"></script>
+</body>
+</html>
